@@ -1,0 +1,34 @@
+{
+  // TODO: Should these include/exclude strings or comments?
+  "autoClosingPairs": [
+    ["{", "}"],
+    ["[", "]"],
+    ["(", ")"],
+    { "open": "\"", "close": "\"", "notIn": ["string"] },
+    { "open": "'", "close": "'", "notIn": ["string"] },
+    { "open": "/*", "close": " */", "notIn": ["string"] },
+    { "open": "`", "close": "`", "notIn": ["string"] }
+  ],
+  "brackets": [
+    ["(", ")"],
+    ["[", "]"],
+    ["{", "}"]
+  ],
+  "colorizedBracketPairs": [
+    ["(", ")"],
+    ["[", "]"],
+    ["{", "}"]
+  ],
+  "comments": {
+    "blockComment": ["/*", "*/"],
+    "lineComment": "//"
+  },
+  "surroundingPairs": [
+    ["{", "}"],
+    ["[", "]"],
+    ["(", ")"],
+    ["<", ">"],
+    ["\"", "\""],
+    ["'", "'"]
+  ]
+}

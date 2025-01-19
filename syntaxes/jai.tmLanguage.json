@@ -1,0 +1,88 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "information_for_contributors": [
+    "This file is mishmash of textmate styles from: ziglang/vscode-zig, DanielGavin/ols, and RobotPajamas/suspenders",
+    "It errors on simplicity over craziness - because Jai is an evolving language anyways"
+  ],
+  "name": "Jai",
+  "scopeName": "source.jai",
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#keywords" },
+    { "include": "#operators" }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash.jai",
+          "begin": "//",
+          "end": "\n",
+          "patterns": [
+            {
+              "include": "#commentContents"
+            }
+          ]
+        },
+        {
+          "name": "comment.block.jai",
+          "begin": "/\\*",
+          "end": "\\*/",
+          "patterns": [
+            {
+              "include": "#commentContents"
+            }
+          ]
+        }
+      ]
+    },
+    "commentContents": {
+      "patterns": [
+        {
+          "name": "keyword.todo.jai",
+          "match": "\\b(TODO|FIXME|XXX|NOTE)\\b:?"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.conditional.jai",
+          "match": "\\b(case|if|ifx|else|then)\\b"
+        },
+        {
+          "name": "keyword.control.flow.jai",
+          "match": "\\b(break|continue|defer|return)\\b"
+        },
+        {
+          "name": "keyword.control.repeat.jai",
+          "match": "\\b(while|for)\\b"
+        },
+        {
+          "name": "storage.type.jai",
+          "match": "\\b(?:Any|void|string|bool|float|float32|float64|int|u8|u16|u32|u64|s8|s16|s32|s64|enum|struct|union)\\b"
+        },
+        {
+          "name": "keyword.other.directive.jai",
+          "comment": "Instead of listing all directives, finding all words starting with a #",
+          "match": "#\\w+"
+        },
+        {
+          "name": "keyword.operator.assignment.jai",
+          "match": "\\b(::|:=|=)\\b"
+        },
+        {
+          "name": "keyword.operator.comparison.jai",
+          "match": "(==|!=|<=|>=|<|>)"
+        },
+        {
+          "name": "storage.type.function.arrow.jai",
+          "match": "->"
+        }
+      ]
+    },
+    "operators": {
+      "patterns": []
+    }
+  }
+}

@@ -1,0 +1,11 @@
+# Ignore everything
+**
+
+# Whitelist only what we want in the final package
+!dist/main.js
+!syntaxes/language-configuration.json
+!syntaxes/jai.tmLanguage.json
+!CHANGELOG.md
+!LICENSE
+!package.json
+!README.md
