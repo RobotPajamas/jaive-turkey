@@ -1,12 +1,8 @@
 #import "uv";
 #import "Basic";
-#import "File";
 String :: #import "String";
 Jaison :: #import "jaison";
 
-LOG_TO_FILE :: true;
-
-logfile: File;
 stdin_pipe: uv_pipe_t;
 stdout_pipe: uv_pipe_t;
 
@@ -36,17 +32,6 @@ read_stdin :: (stream: *uv_stream_t, nread: s64, buf: *uv_buf_t) #c_call {
             return;
         }
 
-        #if LOG_TO_FILE {
-            // TODO: Log not flushing without this?
-            logfile, _ = file_open("./jaive-turkey.log", for_writing=true, keep_existing_content=true);
-            defer file_close(*logfile);
-            file_write(*logfile, tprint("%, %, %\n", nread, data.count, content.count));
-            file_write(*logfile, tprint("%, \n", request));
-            file_write(*logfile, header);
-            file_write(*logfile, content.data, content_length);
-            file_write(*logfile, content.data, content_length);
-        }
-
         if request.method == {
             case "initialize";
                 response := InitializeResponseMessage.{
@@ -55,11 +40,6 @@ read_stdin :: (stream: *uv_stream_t, nread: s64, buf: *uv_buf_t) #c_call {
                 response_content := Jaison.json_write_string(response,, temp);
                 // TODO: Use the correct libuv writers/buffers
                 print("Content-Length: %\r\n\r\n%", response_content.count, response_content);
-                #if LOG_TO_FILE {
-                    logfile, _ = file_open("./jaive-turkey.log", for_writing=true, keep_existing_content=true);
-                    // defer file_close(*logfile);
-                    file_write(*logfile, tprint("Content-Length: %\r\n\r\n%", response_content.count, response_content));
-                }
         }
 
         
@@ -76,12 +56,6 @@ alloc_buffer :: (handle: *uv_handle_t, suggested_size: u64, buf: *uv_buf_t) #c_c
 }
 
 main :: () {
-    logfile, _ = file_open("./jaive-turkey.log", for_writing=true, keep_existing_content=false);
-    if !file_write(*logfile, "main | Starting server \n") {
-        print("main | Failed to write file\n");
-    }
-    // file_close(*logfile);
-
     uv_pipe_init(uv_default_loop(), *stdin_pipe, 0);
     uv_pipe_open(*stdin_pipe, 0);
     
