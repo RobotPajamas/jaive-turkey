@@ -83,7 +83,7 @@
     "watch": "pnpm run build-base --sourcemap --watch"
   },
   "devDependencies": {
-    "@types/node": "^22.15.29",
+    "@types/node": "^24.1.0",
     "@types/vscode": "^1.95.0",
     "@vitest/coverage-v8": "^3.2.0",
     "@vscode/test-electron": "^2.5.2",
