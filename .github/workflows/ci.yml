@@ -1,5 +1,7 @@
 # Based on https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-data
 
+name: CI
+
 on:
   push:
     branches: ["main"]
@@ -10,7 +12,7 @@ on:
   workflow_dispatch:
 
 env:
-  NODE_VERSION: 22.x
+  NODE_VERSION: 24.x
 
 jobs:
   build:
@@ -20,7 +22,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       # We use Deno for linting/formatting - maybe swapping to oxc when they have a formatter, or Deno when I'm more comfortable building with it
       - name: Install Deno
@@ -32,7 +34,7 @@ jobs:
         uses: pnpm/action-setup@v4
 
       - name: Use Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: "pnpm"
